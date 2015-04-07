@@ -1,0 +1,24 @@
+PRIMARY AUTHORS AND CONTRIBUTORS TO PDF2IMAGE:
+
+Erik Engstrom
+http://flexpaper.devaldi.com/pdf2image/
+
+Based on the PDFTOHTML Project. 
+Original authors of PDFTOHTML:
+Gueorgui Ovtcharov
+Rainer Dorsch <http://www.ra.informatik.uni-stuttgart.de/~rainer/>
+
+Author of the Xpdf program on which pdftohtml is based: 
+Derek B. Noonburg <derekn@foolabs.com>
+
+Current maitainer:
+Erik Engstrom <erik.engstrom@devaldi.com>
+
+Contributors (in random/chronological order):
+Claus Hulstrom and Zoltan Hawryluk - improvements in the generated HTML code
+Anjo Anjewierden - XML output
+Adjamir Galvão <adjamir@hotmail.com> - improvements of XML output
+Søren Boll Overgaard <boll@fork.dk> - FreeBSD port, Debian package
+Ivar Abrahamsen <k111@ivar.co.uk> - help with noframes complex output
+Edgar Luna Diaz <kheb@gnulinux.org.mx> - page numbering patch
+Nicolas Pitre <nico@cam.org> - document outline patch, cleanup

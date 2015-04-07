@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT pdf2xml (page*)>
+<!ELEMENT page (text*)>
+<!ELEMENT text (#PCDATA)>
+
+<!ATTLIST page
+    width CDATA #REQUIRED
+    height CDATA #REQUIRED
+    number CDATA #REQUIRED
+>
+
+<!ATTLIST text
+    top CDATA #REQUIRED
+    left CDATA #REQUIRED
+    width CDATA #REQUIRED
+    height CDATA #REQUIRED
+    color CDATA #REQUIRED
+    bgcolor CDATA #IMPLIED
+    family CDATA #REQUIRED
+    face CDATA #REQUIRED
+    size CDATA #REQUIRED
+>

@@ -1,0 +1,41 @@
+/* aconf.h.  Generated automatically by configure.  */
+/*
+ * aconf.h
+ *
+ * Copyright 2002 Derek B. Noonburg
+ */
+
+#ifndef ACONF_H
+#define ACONF_H
+
+/*
+ * Full path for the system-wide xpdfrc file.
+ */
+#undef SYSTEM_XPDFRC
+
+/*
+ * Various include files and functions.
+ */
+#undef HAVE_DIRENT_H
+#undef HAVE_STRINGS_H
+#undef HAVE_POPEN
+#undef HAVE_MKSTEMP
+#undef HAVE_MKSTEMPS
+
+/*
+ * This is defined if using libXpm.
+ */
+#undef HAVE_X11_XPM_H
+
+/*
+ * One of these is defined if using FreeType 2.
+ */
+#undef HAVE_FREETYPE_H
+#undef HAVE_FREETYPE_FREETYPE_H
+
+/*
+ * Defined if the Splash library is avaiable.
+ */
+#undef HAVE_SPLASH
+
+#endif

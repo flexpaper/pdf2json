@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT pdf2xmljson (page*)>
+<!ELEMENT page (text*)>
+
+<!ATTLIST page
+    width CDATA #REQUIRED
+    height CDATA #REQUIRED
+    number CDATA #REQUIRED
+>
