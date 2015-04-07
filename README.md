@@ -25,6 +25,25 @@ Usage: pdf2json [options] <PDF-file> [<output-file>]
   -upw <string>     : user password (for encrypted files)
 ```
 
+Compiling & Installing on Linux
+-------------------
+./configure
+make
+sudo make install
+
+
+Installing on Windows
+-------------------
+Download the installer (.msi file) and run through the installation steps
+
+
+
+Compiling on Windows
+-------------------
+Make sure you have Visual Studio installed and run ms_make.bat
+
+
+
 License
 -------------------
 GNU GPL v2
