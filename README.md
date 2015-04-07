@@ -27,14 +27,14 @@ Usage: pdf2json [options] <PDF-file> [<output-file>]
 
 Compiling & Installing on Linux
 -------------------
-./configure
-make
-sudo make install
+./configure<br/>
+make<br/>
+sudo make install<br/>
 
 
 Installing on Windows
 -------------------
-Download the installer (.msi file) and run through the installation steps
+Download the latest installer (.msi file) and run through the installation steps
 
 
 
