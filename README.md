@@ -5,6 +5,7 @@ PDF2JSON is a conversion library based on XPDF (3.02) which can be used for high
 
 Usage
 -----
+```
 Usage: pdf2json [options] <PDF-file> [<output-file>]
   -f <int>          : first page to convert
   -l <int>          : last page to convert
@@ -22,6 +23,7 @@ Usage: pdf2json [options] <PDF-file> [<output-file>]
   -v                : print copyright and version info
   -opw <string>     : owner password (for encrypted files)
   -upw <string>     : user password (for encrypted files)
+```
 
 License
 -------------------
