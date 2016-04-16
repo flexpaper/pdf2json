@@ -18,7 +18,6 @@ FOFILIBDIR = ../fofi
 
 CXXFLAGS = -I/usr/local/include @CXXFLAGS@ @DEFS@ -I.. -I$(GOOSRCDIR) -I$(FOFISRCDIR) -I$(srcdir)
 
-CXX = g++
 AR = ar rc
 RANLIB = ranlib
 
