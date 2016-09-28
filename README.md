@@ -50,5 +50,5 @@ GNU GPL v2
 
 <br/>
 
-<h3>Maintained and sponsored by █▒▓▒░ <a href="http://flowpaper.com/">The FlowPaper Project</a></h3>
+<h3><a href="http://flowpaper.com/">For the latest about this PDF to JSON converter see the FlowPaper home page</a></h3>
 
