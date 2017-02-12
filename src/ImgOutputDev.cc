@@ -851,7 +851,7 @@ ImgOutputDev::ImgOutputDev(char *fileName, char *title,
       //else if (textAsJSON) right->append(".js");
       
       if(this->split>0 && this->hasValidSplitFileName()){
-        this->setSplitFileName(10,false);
+        this->setSplitFileName(this->split,false);
       }else if (!(page=fopen(right->getCString(),"w"))){
           delete right;
           error(-1, "Couldn't open html file '%s'", right->getCString());
