@@ -1022,7 +1022,12 @@ void ImgOutputDev::endPage() {
   if(this->split>0 && (pageNum % this->split) == 0 && this->hasValidSplitFileName()){
       if(textAsJSON){fputs("]",page);}else{fputs("</pdf2xml>\n",page);}
       this->passedFirstPage = gFalse;
-      this->setSplitFileName(pageNum + this->split,true);
+      //this->setSplitFileName(pageNum + this->split,true);
+      if(this->split>1) {
+         this->setSplitFileName(pageNum + this->split,true);
+      } else {
+         this->setSplitFileName(pageNum,true);
+      }
       if(textAsJSON){fputs("[",page);}else{fputs("<pdf2xml>\n",page);  }
       //printf("PROCESS: %s",tmp->getCString());
       //printf("mod %d",(this->split-(this->split/pageNum)*pageNum)); 
