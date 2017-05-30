@@ -12,22 +12,24 @@
     char *name;
   };
 
-const int font_num=13;
-
-static Fonts fonts[font_num+1]={  
+const int font_num=15;
+GString* f_name;
+static Fonts fonts[font_num+1]={                        //fonts that can be identified by the converter
      {"Courier",               "Courier" },
-     {"Courier-Bold",           "Courier"},
-     {"Courier-BoldOblique",    "Courier"},
-     {"Courier-Oblique",        "Courier"},
+     {"Courier-Bold",           "Courier_b"},
+     {"Courier-BoldOblique",    "Courier_bo"},
+     {"Courier-Oblique",        "Courier_o"},
      {"Helvetica",              "Helvetica"},
-     {"Helvetica-Bold",         "Helvetica"},
-     {"Helvetica-BoldOblique",  "Helvetica"},
-     {"Helvetica-Oblique",      "Helvetica"},
-     {"Symbol",                 "Symbol"   },
-     {"Times-Bold",             "Times"    },
-     {"Times-BoldItalic",       "Times"    },
-     {"Times-Italic",           "Times"    },
-     {"Times-Roman",            "Times"    },
+     {"Helvetica-Bold",         "Helvetica_b"},
+     {"Helvetica-BoldOblique",  "Helvetica_bo"},
+     {"Helvetica-Oblique",      "Helvetica_o"},
+     {"Symbola",                "Symbola"   },
+     {"Times-Bold",             "Times_b"    },
+     {"Times-BoldItalic",       "Times_bi"    },
+     {"Times-Italic",           "Times_i"    },
+     {"Times-Roman",            "Times_R"    },
+     {"TimesNewRomanPSMT",      "TimesNewRoman"    },
+     {"ArialMT",                "ArialMT"    },
      {" "          ,            "Times"    },
 };
 
@@ -107,7 +109,7 @@ XmlFont::XmlFont(GString* ftname,int _size, double _charspace, GfxRGB rgb){
     /*||strstr(fontname->lowerCase()->getCString(),"oblique"))  italic=gTrue;*/ 
     
     int i=0;
-    while (strcmp(ftname->getCString(),fonts[i].Fontname)&&(i<font_num)) 
+    while (strcmp(ftname->getCString()+7,fonts[i].Fontname)&&(i<font_num)) 
 	{
 		i++;
 	}
@@ -359,30 +361,60 @@ GString* XmlFontAccu::CSStyle(int i,GBool textAsJSON){
    GString *colorStr=font.getColor().toString();
    GString *fontName=font.getFontName();
    GString *lSize;
+   GString *f_bold=GString::fromInt(font.isBold());
+   GString *f_italic=GString::fromInt(font.isItalic());
+   GString *f_oblique=GString::fromInt(font.isOblique());
    double _charspace = font.getCharSpace();
    char *cspace = new char [20];
    sprintf(cspace,"%0.05f",_charspace);
    
    if (xml && !textAsJSON) {
-     tmp->append("<fontspec id=\"");
-     tmp->append(iStr);
+    // tmp->append("<fontspec id=\"");
+    // tmp->append(iStr);
+     
      tmp->append("\" size=\"");
      tmp->append(Size);
+     
      tmp->append("\" family=\"");
      tmp->append(fontName); //font.getFontName());
+     
      tmp->append("\" color=\"");
      tmp->append(colorStr);
+
+     tmp->append("\" bold=\"");
+     tmp->append(f_bold);
+     
+     tmp->append("\" italic=\"");
+     tmp->append(f_italic);
+  
+     tmp->append("\" oblique=\"");
+     tmp->append(f_oblique);
+
      tmp->append("\"/>");
-   }else if(textAsJSON){
-     tmp->append("{\"fontspec\":\"");
-     tmp->append(iStr);
-     tmp->append("\",\"size\":\"");
+   }
+   else if(textAsJSON){
+     
+     //tmp->append("{\"fontspec\":\"");
+    // tmp->append(iStr);
+     
+     tmp->append("\"fontsize\":\"");
      tmp->append(Size);
-     tmp->append("\",\"family\":\"");
+     
+     tmp->append("\",\"font\":\"");
      tmp->append(fontName); //font.getFontName());
+     
      tmp->append("\",\"color\":\"");
      tmp->append(colorStr);
-     tmp->append("\"}");
+
+     tmp->append("\",\"bold\":\"");
+     tmp->append(f_bold);
+     
+     tmp->append("\",\"italic\":\"");
+     tmp->append(f_italic);
+  
+     tmp->append("\",\"oblique\":\"");
+     tmp->append(f_oblique);
+     tmp->append("\"");
    }
 
    delete fontName;

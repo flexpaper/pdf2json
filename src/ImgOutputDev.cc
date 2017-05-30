@@ -15,6 +15,7 @@
 #ifdef __GNUC__
 #pragma implementation
 #endif
+#define MAX_NO_FONTS 25 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,6 +37,7 @@
 
 int HtmlPage::pgNum=0;
 int ImgOutputDev::imgNum=1;
+char fontdata[MAX_NO_FONTS][110];   //stores data for all the fonts used in the file
 
 extern double scale;
 extern GBool complexMode;
@@ -604,7 +606,7 @@ void HtmlPage::dumpAsXML(FILE* f,int page, GBool passedFirstPage, int totalPages
     if(passedFirstPage){
 	fprintf(f, ",");
     }
-    fprintf(f, "{\"number\":%d,\"pages\":%d,\"height\":%d,\"width\":%d,", page,totalPages,pageHeight,pageWidth);
+    fprintf(f, "{\"number\":%d,\"pages\":%d,\"height\":%d,\"width\":%d", page,totalPages,pageHeight,pageWidth);
   }else{ 
     fprintf(f, "<page number=\"%d\" pages=\"%d\"", page,totalPages);
     fprintf(f," height=\"%d\" width=\"%d\">", pageHeight,pageWidth);
@@ -613,18 +615,23 @@ void HtmlPage::dumpAsXML(FILE* f,int page, GBool passedFirstPage, int totalPages
   GBool passedFirst = false;
 
   // output fonts
-  if(textAsJSON){fprintf(f,"\"fonts\":[");}
-  for(int i=fontsPageMarker;i < fonts->size();i++) {
+  /*if(textAsJSON)
+  {
+    fprintf(f,"\"fonts\":[");
+  }
+  */
+  for(int i=fontsPageMarker;i < fonts->size();i++) 
+  {
     GString *fontCSStyle = fonts->CSStyle(i,textAsJSON);
-    if(textAsJSON && passedFirst) {fprintf(f,",");}
-    fprintf(f,"%s",fontCSStyle->getCString());
+    //if(textAsJSON && passedFirst) {fprintf(f,",");}
+    //fprintf(f,"%s",fontCSStyle->getCString());
+    strcpy(fontdata[i],fontCSStyle->getCString());
     passedFirst = true;
     delete fontCSStyle;
   }
-  if(textAsJSON){fprintf(f,"]");}
+ // if(textAsJSON){fprintf(f,"]");}
   
   GString *str, *str1;
-  
   passedFirst = false;
   if(textAsJSON){
      fprintf(f,",\"text\":[");
@@ -642,7 +649,7 @@ void HtmlPage::dumpAsXML(FILE* f,int page, GBool passedFirstPage, int totalPages
               }
               fprintf(f,"{\"top\":%d,\"left\":%d,",xoutRound(tmp->yMin+this->movey),xoutRound(tmp->xMin+this->movex));	
               fprintf(f,"\"width\":%d,\"height\":%d,",xoutRound(tmp->xMax-tmp->xMin),xoutRound(tmp->yMax-tmp->yMin));
-              fprintf(f,"\"font\":%d,\"data\":\"", tmp->fontpos);
+              fprintf(f,"%s,\"data\":\"", fontdata[tmp->fontpos]);
               if (tmp->fontpos!=-1){
                   str1=fonts->getCSStyle(tmp->fontpos, str);
               }
@@ -653,7 +660,7 @@ void HtmlPage::dumpAsXML(FILE* f,int page, GBool passedFirstPage, int totalPages
 	      }else{
               fprintf(f,"<text top=\"%d\" left=\"%d\" ",xoutRound(tmp->yMin+this->movey),xoutRound(tmp->xMin+this->movey));
               fprintf(f,"width=\"%d\" height=\"%d\" ",xoutRound(tmp->xMax-tmp->xMin),xoutRound(tmp->yMax-tmp->yMin));
-              fprintf(f,"font=\"%d\">", tmp->fontpos);
+              fprintf(f,"%d\">", fontdata[tmp->fontpos]);
               if (tmp->fontpos!=-1){
                   str1=fonts->getCSStyle(tmp->fontpos, str);
               }
