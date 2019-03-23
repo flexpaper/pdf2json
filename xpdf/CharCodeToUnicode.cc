@@ -21,6 +21,7 @@
 #include "GlobalParams.h"
 #include "PSTokenizer.h"
 #include "CharCodeToUnicode.h"
+#include "GooLikely.h"
 
 //------------------------------------------------------------------------
 
@@ -320,9 +321,14 @@ void CharCodeToUnicode::addMapping(CharCode code, char *uStr, int n,
   if (code >= mapLen) {
     oldLen = mapLen;
     mapLen = (code + 256) & ~255;
-    map = (Unicode *)greallocn(map, mapLen, sizeof(Unicode));
-    for (i = oldLen; i < mapLen; ++i) {
-      map[i] = 0;
+    if (unlikely(code >= mapLen)) {
+      error(-1, "Illegal code value in CharCodeToUnicode::addMapping");
+      return;
+    } else {
+      map = (Unicode *)greallocn(map, mapLen, sizeof(Unicode));
+      for (i = oldLen; i < mapLen; ++i) {
+        map[i] = 0;
+      }
     }
   }
   if (n <= 4) {
